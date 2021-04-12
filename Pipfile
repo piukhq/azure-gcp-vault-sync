@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+azure-identity = "*"
+azure-keyvault-secrets = "*"
+google-cloud-secret-manager = "*"
+
+[dev-packages]
+flake8 = "*"
+isort = "*"
+black = "==20.8b1"
+
+[requires]
+python_version = "3.9"
