@@ -5,3 +5,5 @@ ADD . .
 
 RUN pip --no-cache install pipenv && \
     pipenv install --system --deploy --ignore-pipfile
+
+CMD [ "python", "/app/main.py" ]
