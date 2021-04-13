@@ -12,4 +12,4 @@ deploy:
     - docker build --pull -t "$CI_REGISTRY/azure-gcp-vault-sync:$CTAG" .
     - docker push "$CI_REGISTRY/azure-gcp-vault-sync:$CTAG"
   only:
-    - develop
+    - master
