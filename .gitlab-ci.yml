@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  environment:
+    name: production
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  script:
+    - export CTAG="develop-$(date +%F-%H%M%S)"
+    - docker build --pull -t "$CI_REGISTRY/azure-gcp-vault-sync:$CTAG" .
+    - docker push "$CI_REGISTRY/azure-gcp-vault-sync:$CTAG"
+  only:
+    - develop
