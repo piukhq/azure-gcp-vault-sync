@@ -8,6 +8,7 @@ azure-identity = "*"
 azure-keyvault-secrets = "*"
 google-cloud-secret-manager = "*"
 apscheduler = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 flake8 = "*"
