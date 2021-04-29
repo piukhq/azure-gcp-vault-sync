@@ -6,6 +6,12 @@ from apscheduler.triggers.cron import CronTrigger
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from google.cloud.secretmanager import SecretManagerServiceClient
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn='https://71931c5b3d9b4c8ab52619fdc1d4e6c4@o503751.ingest.sentry.io/5740941',
+    traces_sample_rate=0
+)
 
 logging.basicConfig(level=logging.INFO)
 logging.getLogger("azure").setLevel(logging.ERROR)
