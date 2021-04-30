@@ -17,7 +17,12 @@ logging.basicConfig(level=logging.INFO)
 logging.getLogger("azure").setLevel(logging.ERROR)
 
 akv_uri = "https://bink-uksouth-prod-com.vault.azure.net"
-akv_client = SecretClient(vault_url=akv_uri, credential=DefaultAzureCredential())
+akv_client = SecretClient(vault_url=akv_uri, credential=DefaultAzureCredential(
+    exclude_environment_credential=True,
+    exclude_shared_token_cache_credential=True,
+    exclude_visual_studio_code_credential=True,
+    exclude_interactive_browser_credential=True,
+))
 
 with open("/tmp/auth.json", "w+") as f:
     f.write(akv_client.get_secret("azure-gcp-vault-sync").value)
