@@ -1,28 +1,28 @@
 import logging
 
 import google.api_core.exceptions
+import sentry_sdk
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 from google.cloud.secretmanager import SecretManagerServiceClient
-import sentry_sdk
 
-sentry_sdk.init(
-    dsn='https://71931c5b3d9b4c8ab52619fdc1d4e6c4@o503751.ingest.sentry.io/5740941',
-    traces_sample_rate=0
-)
+sentry_sdk.init(dsn="https://71931c5b3d9b4c8ab52619fdc1d4e6c4@o503751.ingest.sentry.io/5740941", traces_sample_rate=0)
 
 logging.basicConfig(level=logging.INFO)
 logging.getLogger("azure").setLevel(logging.ERROR)
 
 akv_uri = "https://bink-uksouth-prod-com.vault.azure.net"
-akv_client = SecretClient(vault_url=akv_uri, credential=DefaultAzureCredential(
-    exclude_environment_credential=True,
-    exclude_shared_token_cache_credential=True,
-    exclude_visual_studio_code_credential=True,
-    exclude_interactive_browser_credential=True,
-))
+akv_client = SecretClient(
+    vault_url=akv_uri,
+    credential=DefaultAzureCredential(
+        exclude_environment_credential=True,
+        exclude_shared_token_cache_credential=True,
+        exclude_visual_studio_code_credential=True,
+        exclude_interactive_browser_credential=True,
+    ),
+)
 
 with open("/tmp/auth.json", "w+") as f:
     f.write(akv_client.get_secret("azure-gcp-vault-sync").value)
