@@ -20,7 +20,7 @@ jobs:
       - run: flake8 .
       - run: black --line-length=120 --check .
       - run: isort --check --line-length 120 --profile black .
-  create_dev_release:
+  create_master_release:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     name: create_master_release
     runs-on: ubuntu-latest
@@ -39,5 +39,3 @@ jobs:
           push: true
           tags: |
             binkcore.azurecr.io/azure-gcp-vault-sync:develop-${{ steps.date.outputs.date }}
-            binkcore.azurecr.io/azure-gcp-vault-sync:latest
-
